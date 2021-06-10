@@ -9149,6 +9149,13 @@ exports.default = {
   watch: {},
   mounted: function mounted() {},
 
+  computed: {
+    filterVideoList: function filterVideoList() {
+      return this.videoList.filter(function (video) {
+        return video.show;
+      });
+    }
+  },
   methods: {
     toggleVideoStatus: function toggleVideoStatus(id, show) {
       this.videoList.forEach(function (video) {
@@ -18631,7 +18638,7 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "video-list"
-  }, _vm._l((_vm.videoList.filter(function (item) { return item.show; })), function(item) {
+  }, _vm._l((_vm.filterVideoList), function(item) {
     return _c('div', {
       key: item.id,
       staticClass: "video-item",
