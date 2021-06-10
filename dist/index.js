@@ -9150,6 +9150,13 @@ exports.default = {
   mounted: function mounted() {},
 
   methods: {
+    toggleVideoStatus: function toggleVideoStatus(id, show) {
+      this.videoList.forEach(function (video) {
+        if (video.id === id) {
+          video.show = show;
+        }
+      });
+    },
     join: function join() {
       var _this = this;
 
@@ -9317,7 +9324,8 @@ exports.default = {
           id: stream.id,
           muted: isLocal,
           stream: stream,
-          isLocal: isLocal
+          isLocal: isLocal,
+          show: false
         };
 
         that.videoList.push(video);
@@ -18623,7 +18631,7 @@ module.exports = function normalizeComponent (
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "video-list"
-  }, _vm._l((_vm.videoList), function(item) {
+  }, _vm._l((_vm.videoList.filter(function (item) { return item.show; })), function(item) {
     return _c('div', {
       key: item.id,
       staticClass: "video-item",
