@@ -1,6 +1,6 @@
 <template>
   <div class="video-list">
-    <div v-for="item in videoList"
+    <div v-for="item in videoList.filter(item => item.show)"
          v-bind:video="item"
          v-bind:key="item.id"
          class="video-item">
@@ -76,6 +76,14 @@
     mounted() {
     },
     methods: {
+      toggleVideoStatus(id, show){
+        this.videoList.forEach( video => {
+          if ( video.id === id){
+            video.show = show
+          }
+        })
+      },
+
       async join() {
         var that = this;
         this.log('join');
@@ -153,7 +161,8 @@
             id: stream.id,
             muted: isLocal,
             stream: stream,
-            isLocal: isLocal
+            isLocal: isLocal,
+            show: false
           };
 
           that.videoList.push(video);
